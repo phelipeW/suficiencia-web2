@@ -30,7 +30,7 @@ async function login(req, res, next){
 async function update(req, res, next){
   try {
     const { body, params } = req;
-    console.log('userId',req.userId)
+    
     await user.update(
       res,
       params.id, 

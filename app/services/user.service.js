@@ -5,7 +5,7 @@ const db = require('../models')
 const { secret } = require('../../config/general.config')
 const { validEmail } = require("../utils/helper")
 
-const User = db.User
+const User = db.user
 
 async function create(user) {
 

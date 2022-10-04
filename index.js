@@ -8,8 +8,12 @@ app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
+const db = require("./app/models");
+// db.sequelize.sync();
+
 // Routes
 const userRouter = require('./app/routes/user')
+const postRouter = require('./app/routes/post')
 
 
 app.get('/', (req, res) => {
@@ -17,6 +21,8 @@ app.get('/', (req, res) => {
 });
 
 app.use('/users', userRouter);
+app.use('/posts', postRouter);
+
 
 app.listen(port, () => {
     console.log(`API listening on port ${port}`)
