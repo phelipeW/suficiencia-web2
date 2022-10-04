@@ -21,6 +21,10 @@ module.exports = (sequelize) => {
             allowNull: false,
             type: DataTypes.DOUBLE,
           },
+          likes: {
+            allowNull: true,
+            type: DataTypes.INTEGER,
+          }
     });
     return Post;
 }

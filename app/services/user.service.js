@@ -109,7 +109,6 @@ async function update(res, id, userData, auth){
   })
 
   if(id != authUser.id){
-    console.log('authUser.dataValues',authUser.dataValues)
     if(authUser.dataValues.userType != 1){
       return res.status(401).json({ message: 'Unauthorized' })
     }

@@ -6,6 +6,7 @@ const authenticateJWT = require("../middleware/authJwt")
 
 // Unauthneticated routes
 router.get('/', postsController.list);
+router.put('/:id', postsController.like);
 
 router.use(authenticateJWT)
 // Authenticated routes
