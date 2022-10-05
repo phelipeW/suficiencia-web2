@@ -14,6 +14,8 @@ const db = require("./app/models");
 // Routes
 const userRouter = require('./app/routes/user')
 const postRouter = require('./app/routes/post')
+const commentRouter = require('./app/routes/comment')
+
 
 
 app.get('/', (req, res) => {
@@ -22,6 +24,8 @@ app.get('/', (req, res) => {
 
 app.use('/users', userRouter);
 app.use('/posts', postRouter);
+app.use('/comments', commentRouter);
+
 
 
 app.listen(port, () => {

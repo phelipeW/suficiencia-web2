@@ -80,8 +80,8 @@ async function like(postId) {
     }
 
     await Post.update({likes : foundPost.dataValues.likes+1}, {where: { id: postId} })
-
-    return {};
+    const likedPost = await Post.findOne({ where: { id: postId } })
+    return likedPost;
 }
 
 module.exports = {

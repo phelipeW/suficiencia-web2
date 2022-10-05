@@ -30,7 +30,7 @@ async function create(req, res, next){
     try {
         const postLiked = await post.like(req.params.id);
         if(postLiked){
-            res.status(201).json(postLiked)
+            res.status(200).json(postLiked)
         } else {
             res.status(404).json({message: 'Post not found!'});
         }

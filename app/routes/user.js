@@ -8,8 +8,8 @@ const authenticateJWT = require("../middleware/authJwt")
 router.post('/register', usersController.register);
 router.post('/login', usersController.login);
 
-router.use(authenticateJWT)
 // Authenticated routes
+router.use(authenticateJWT)
 router.put('/:id', usersController.update)
 router.get('/', usersController.get);
 router.get('/:id', usersController.getOne);
