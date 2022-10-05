@@ -1,7 +1,6 @@
 const express = require('express');
 const cors = require("cors");
-const { User } = require('./app/models');
-const port = 3000
+const port = 5432
 
 const app = express();
 app.use(cors());
