@@ -26,6 +26,6 @@ app.use("/users", userRouter);
 // app.use("/posts", postRouter);
 // app.use("/comments", commentRouter);
 
-app.listen(process.env.PORT || port, () => {
+app.listen(process.env.DATABASE_PORT || port, () => {
     console.log(`API listening on port ${port}`);
 });
