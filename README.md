@@ -5,7 +5,8 @@ Steps to run the app:
     DATABASE_PASSWORD=root  
     DATABASE_NAME=pizzaria-utfpr  
     DATABASE_HOST=localhost  
-    DATABASE_DIALECT=postgres 
+    DATABASE_DIALECT=postgres  
+    DATABASE_PORT=5432  
 3 - execute "npm start"  
 4 - Comment the line 12 on index.js file(to stop the database sync)  
   
