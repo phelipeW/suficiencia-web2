@@ -1,10 +1,11 @@
 Steps to run the app:  
 1 - Run : npm install  
-2 - Create a postgres database with the following credentials:  
-    username: 'postgres',  
-    password: 'root',  
-    database: 'pizzaria-utfpr',  
-    host: 'localhost',  
+2 - Create .env  
+    DATABASE_USERNAME=postgres  
+    DATABASE_PASSWORD=root  
+    DATABASE_NAME=pizzaria-utfpr  
+    DATABASE_HOST=localhost  
+    DATABASE_DIALECT=postgres 
 3 - execute "npm start"  
 4 - Comment the line 12 on index.js file(to stop the database sync)  
   

@@ -1,7 +1,8 @@
 module.exports = {
-  username: 'ntjeylxyilgure',
-  password: 'ea1a905c3286fbef4805387cc6d64ff9c31b054660ef0c8c043b6489b8bd5d40',
-  database: 'd17speb13i7lsa',
-  host: 'ec2-44-206-197-71.compute-1.amazonaws.com',
-  port: "5432"
+    username: process.env.DATABASE_USERNAME,
+    password: process.env.DATABASE_PASSWORD,
+    database: process.env.DATABASE_NAME,
+    host: process.env.DATABASE_HOST,
+    dialect: process.env.DATABASE_DIALECT,
+    type: "postgres"
 }
