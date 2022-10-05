@@ -15,16 +15,16 @@ db.sequelize.sync();
 
 // Routes
 const userRouter = require("./app/routes/user");
-// const postRouter = require('./app/routes/post')
-// const commentRouter = require('./app/routes/comment')
+const postRouter = require("./app/routes/post");
+const commentRouter = require("./app/routes/comment");
 
 app.get("/", (req, res) => {
     res.send("Hello World!");
 });
 
 app.use("/users", userRouter);
-// app.use("/posts", postRouter);
-// app.use("/comments", commentRouter);
+app.use("/posts", postRouter);
+app.use("/comments", commentRouter);
 
 app.listen(process.env.DATABASE_PORT || port, () => {
     console.log(`API listening on port ${process.env.DATABASE_PORT || port}`);
