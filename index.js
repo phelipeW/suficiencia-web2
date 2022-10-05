@@ -23,8 +23,8 @@ app.get("/", (req, res) => {
 });
 
 app.use("/users", userRouter);
-app.use("/posts", postRouter);
-app.use("/comments", commentRouter);
+// app.use("/posts", postRouter);
+// app.use("/comments", commentRouter);
 
 app.listen(process.env.PORT || port, () => {
     console.log(`API listening on port ${port}`);
