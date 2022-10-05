@@ -9,7 +9,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
 const db = require("./app/models");
-// db.sequelize.sync();
+db.sequelize.sync();
 
 // Routes
 const userRouter = require('./app/routes/user')
