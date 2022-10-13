@@ -8,23 +8,6 @@ const { validEmail, validPassword } = require("../utils/helper")
 const User = db.user
 
 async function create(user) {
-
-    const validedPassword = validPassword(user.password);
-
-    if(!validedPassword){
-        return { message: "Password is invalid!"};
-    }
-
-    const validedEmail = validEmail(user.email);
-
-    if(!validedEmail){
-        return { message: "Email is invalid!"};
-    }
-
-    if(user.userType <= 0 || user.userType >= 3){
-        return { message: "userType is invalid, must be greater than 0 and lower than 3!" };
-    }
-
     const foundUser = await User.findOne({
         where: {
         email: user.email
@@ -45,11 +28,9 @@ async function create(user) {
     if (createdUser) {
         return createdUser
     }
-
-    return { message: "Error creating use!"}
 }
 
-async function login(res, user) {
+async function login(user) {
     const foundUser = await User.findOne({
         where: {
         email: user.email,
@@ -62,10 +43,7 @@ async function login(res, user) {
         foundUser.password
         )
         if (!passwordIsValid) {
-        return res.status(401).json({
-            accessToken: null,
-            message: 'Invalid Password!',
-        })
+        return { message: 'Invalid Password!' }
         }
         const token = jwt.sign({ id: foundUser.id }, secret, {
         expiresIn: 86400, // 24 hours
@@ -74,17 +52,17 @@ async function login(res, user) {
         ...foundUser.toJSON(),
         token,
         }
-        return res.status(200).json(dataToSend)
+        return dataToSend;
     }
-  return res.status(404).json({ message: 'User Not found!' })
+    return { message: 'User Not found!' }
 }
 
-async function update(res, id, userData, auth){
+async function update(id, userData, auth){
     if(userData.email){
         const validedEmail = validEmail(userData.email);
 
         if(!validedEmail){
-        return res.status(400).json({ message: "Email is invalid!"});
+        return { message: "Email is invalid!"};
         }
         const emailUser = await User.findOne({
         where: {
@@ -100,7 +78,7 @@ async function update(res, id, userData, auth){
     
     if(userData.userType){
         if(userData.userType <= 0){
-        return res.status(400).json({ message: "UserType is invalid, must be greater than 0!"});
+        return { message: "UserType is invalid, must be greater than 0!"};
         }
     }
 
@@ -108,7 +86,7 @@ async function update(res, id, userData, auth){
         const validedPassword = validPassword(userData.password);
 
         if(!validedPassword){
-            return res.status(400).json({ message: "Password is invalid!"});
+            return { message: "Password is invalid!"};
         }
         userData.password = bcrypt.hashSync(userData.password, 8)
     }
@@ -121,7 +99,7 @@ async function update(res, id, userData, auth){
 
     if(id != authUser.id){
         if(authUser.dataValues.userType != 1){
-        return res.status(401).json({ message: 'Unauthorized' })
+        return { message: 'Unauthorized' }
         }
     } 
 
@@ -132,7 +110,7 @@ async function update(res, id, userData, auth){
     })
 
     if(!foundUser){
-        return res.status(404).json({ message: 'User Not found!' })
+        return { message: 'User Not found!' }
     } 
 
     await User.update(userData, {
@@ -148,7 +126,7 @@ async function update(res, id, userData, auth){
     })
 
 
-    return res.status(200).json(updatedUser);
+    return updatedUser;
 
 }
 

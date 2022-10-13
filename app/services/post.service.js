@@ -1,41 +1,11 @@
 const { Op } = require('sequelize')
 const db = require('../models')
+const Sequelize = require('sequelize');
+const Post = db.post;
+const Comment = db.comment;
 
-const Post = db.post
 
-async function create(res, post, auth) {
-    if(!post.description){        
-        return res.status(401).json({ message: "Description is required!" });
-    }
-
-    if(post.description.length === 0){
-        return res.status(401).json({ message: "Description should not be empty!" });
-    }
-
-    if(!post.name){
-        return res.status(401).json({ message: "Name is required!" });
-    }
-
-    if(post.name.length === 0){
-        return res.status(401).json({ message: "Name should not be empty!" });
-    }
-
-    if(!post.ingredients){
-        return res.status(401).json({ message: "Ingredients is required!" });
-    }
-
-    if(post.ingredients.length === 0){
-        return res.status(401).json({ message: "Ingredients should not be empty!" });
-    }
-
-    if(!post.price){
-        return res.status(401).json({ message: "Price is required!" });
-    }
-
-    if(post.price <= 0){
-        return res.status(401).json({ message: "Price should be greater than 0!" });
-    }
-    
+async function create(post, auth) {
     var ingredients = post.ingredients.join();
     const createdPost = await Post.create({
         name: post.name,
@@ -47,10 +17,8 @@ async function create(res, post, auth) {
     })
 
     if (createdPost) {
-        return res.json(createdPost)
+        return createdPost;
     }
-
-  return { message: "Error creating post!"}
 }
 
 async function findAll(filters) {
@@ -66,7 +34,20 @@ async function findAll(filters) {
     }
 
     const result = await Post.findAll({
-      where: condition,
+        where: condition,
+        attributes: {
+            include: [
+                [Sequelize.fn('AVG', Sequelize.col('Comments.rating')), 'avgRating']
+            ]
+        },
+        group: 'Posts.id',
+        include: [
+            {
+            model: Comment,
+            as: 'Comments',
+            attributes: [],
+            },
+        ],
     })
   
     return result

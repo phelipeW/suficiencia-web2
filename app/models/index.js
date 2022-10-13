@@ -13,7 +13,7 @@ db.comment = require('./comment.js')(sequelize)
 
 
 db.user.hasMany(db.post)
-db.post.belongsTo(db.user, { as: 'User', constraints: false })
+db.post.belongsTo(db.user, { as: 'User', constraints: false, })
 
 db.post.hasMany(db.comment)
 db.comment.belongsTo(db.post, { as: 'Post', constraints: false })

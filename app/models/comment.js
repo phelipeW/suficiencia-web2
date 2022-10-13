@@ -6,6 +6,10 @@ module.exports = (sequelize) => {
             allowNull: false,
             type: DataTypes.STRING,
         },
+        rating: {
+            allowNull: false,
+            type: DataTypes.DECIMAL(10,2),
+        }
          
     });
     return Comment;
